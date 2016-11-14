@@ -74,7 +74,9 @@ class RectangularRoom(object):
         width: an integer > 0
         height: an integer > 0
         """
-        raise NotImplementedError
+        self.width = width
+        self.height = height
+        self.clean = []
     
     def cleanTileAtPosition(self, pos):
         """
@@ -84,7 +86,13 @@ class RectangularRoom(object):
 
         pos: a Position
         """
-        raise NotImplementedError
+        x = pos.getX()
+        y = pos.getY()
+        tileX = math.floor(x)
+        tileY = math.floor(y)
+        #checking whether tile is cleaned for adding to cleaned list
+        if not self.isTileCleaned(tileX,tileY):
+            self.clean.append((tileX, tileY))
 
     def isTileCleaned(self, m, n):
         """
@@ -96,15 +104,18 @@ class RectangularRoom(object):
         n: an integer
         returns: True if (m, n) is cleaned, False otherwise
         """
-        raise NotImplementedError
-    
+        if (m,n) in self.clean:
+            return True
+        else:
+            return False
+
     def getNumTiles(self):
         """
         Return the total number of tiles in the room.
 
         returns: an integer
         """
-        raise NotImplementedError
+        return self.width * self.height
 
     def getNumCleanedTiles(self):
         """
@@ -112,7 +123,7 @@ class RectangularRoom(object):
 
         returns: an integer
         """
-        raise NotImplementedError
+        return len(self.clean)
 
     def getRandomPosition(self):
         """
@@ -120,7 +131,10 @@ class RectangularRoom(object):
 
         returns: a Position object.
         """
-        raise NotImplementedError
+        x = random.choice(range(self.width))
+        y = random.choice(range(self.height))
+        
+        return Position(x,y)
 
     def isPositionInRoom(self, pos):
         """
@@ -129,7 +143,13 @@ class RectangularRoom(object):
         pos: a Position object.
         returns: True if pos is in the room, False otherwise.
         """
-        raise NotImplementedError
+        x = pos.getX()
+        y = pos.getY()
+        #checking extents of rectangle to make sure position in bounds
+        if 0 <= x < self.width and 0 <= y < self.height:
+            return True
+        else:
+            return False
 
 
 # === Problem 2
@@ -152,7 +172,12 @@ class Robot(object):
         room:  a RectangularRoom object.
         speed: a float (speed > 0)
         """
-        raise NotImplementedError
+        self.room = room
+        self.speed = speed
+        self.dir = random.choice(range(360))
+        self.pos = room.getRandomPosition()
+        #clean title at position
+        room.cleanTileAtPosition(self.pos)
 
     def getRobotPosition(self):
         """
@@ -160,7 +185,7 @@ class Robot(object):
 
         returns: a Position object giving the robot's position.
         """
-        raise NotImplementedError
+        return self.pos
     
     def getRobotDirection(self):
         """
@@ -169,7 +194,7 @@ class Robot(object):
         returns: an integer d giving the direction of the robot as an angle in
         degrees, 0 <= d < 360.
         """
-        raise NotImplementedError
+        return self.dir
 
     def setRobotPosition(self, position):
         """
@@ -177,7 +202,7 @@ class Robot(object):
 
         position: a Position object.
         """
-        raise NotImplementedError
+        self.pos = position
 
     def setRobotDirection(self, direction):
         """
@@ -185,7 +210,7 @@ class Robot(object):
 
         direction: integer representing an angle in degrees
         """
-        raise NotImplementedError
+        self.dir = direction
 
     def updatePositionAndClean(self):
         """
@@ -213,7 +238,16 @@ class StandardRobot(Robot):
         Move the robot to a new position and mark the tile it is on as having
         been cleaned.
         """
-        raise NotImplementedError
+        #generates new position
+        move = self.pos.getNewPosition(self.dir, self.speed)
+        #if in bounds will clean and move on
+        if self.room.isPositionInRoom(move):
+            self.setRobotPosition(move)
+            self.room.cleanTileAtPosition(move)
+        #otherwise just rotates robot and tries again
+        else:
+            angle = random.choice(range(360))
+            self.setRobotDirection(angle)
 
 
 # Uncomment this line to see your implementation of StandardRobot in action!
@@ -239,10 +273,52 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
     robot_type: class of robot to be instantiated (e.g. StandardRobot or
                 RandomWalkRobot)
     """
-    raise NotImplementedError
+    room = RectangularRoom(width, height)
+    
+    def listRobots(num_robots, room, speed, robot_type):
+        """creates a list of robots depending on type and number"""
+        robots = []
+        for i in range(num_robots):
+            robot = robot_type(room, speed)
+            robots.append(robot)
+        return robots
+    
+    def simClean(room, min_coverage):
+        """simulates a # of steps req for # of robots to clean certain %"""
+        #resetting all values
+        cleanPercent = 0.0
+        clean = 0.0
+        steps = 0
+        robots = listRobots(num_robots, room, speed, robot_type)
+        total = float(room.getNumTiles())
+        
+        #loop to run until % reached
+        while cleanPercent < min_coverage:
+            for robot in robots:
+                robot.updatePositionAndClean()
+            #anim.update(room, robots)
+            steps += 1
+            clean = float(room.getNumCleanedTiles())
+            #test percentage
+            cleanPercent = clean / total
+        
+        return steps
+    
+    def simTrials(room, num_trials):
+        """simulates a number of trials on simClean() and returns total step #"""
+        totalSteps = 0
+        for n in range(num_trials):
+            room = RectangularRoom(width, height)
+            #anim = ps2_visualize.RobotVisualization(num_robots, width, height)
+            totalSteps += simClean(room, min_coverage)
+        
+        #returns the mean value of steps
+        return totalSteps / num_trials
+    
+    return simTrials(room, num_trials)
 
 # Uncomment this line to see how much your simulation takes on average
-##print(runSimulation(1, 1.0, 10, 10, 0.75, 30, StandardRobot))
+#print(runSimulation(1, 1.0, 10, 10, 0.75, 30, StandardRobot))
 
 
 # === Problem 5
@@ -258,7 +334,21 @@ class RandomWalkRobot(Robot):
         Move the robot to a new position and mark the tile it is on as having
         been cleaned.
         """
-        raise NotImplementedError
+        #generates new position
+        move = self.pos.getNewPosition(self.dir, self.speed)
+        
+        #if in bounds will clean, rotate and move on
+        if self.room.isPositionInRoom(move):
+            angle = random.choice(range(360))
+            
+            self.setRobotDirection(angle)
+            self.setRobotPosition(move)
+            self.room.cleanTileAtPosition(move)
+        
+        #otherwise just rotates robot and tries again
+        else:
+            angle = random.choice(range(360))
+            self.setRobotDirection(angle)
 
 
 def showPlot1(title, x_label, y_label):
@@ -311,12 +401,10 @@ def showPlot2(title, x_label, y_label):
 # 1) Write a function call to showPlot1 that generates an appropriately-labeled
 #     plot.
 #
-#       (... your call here ...)
-#
+#showPlot1("Time to clean 80% of a 20x20 room for various number of robots", "Robots", "Time/Steps")
 
 #
 # 2) Write a function call to showPlot2 that generates an appropriately-labeled
 #     plot.
 #
-#       (... your call here ...)
-#
+#showPlot2("Time to clean 80% of a various room dimensions with 2 robots", "Aspect Ratio", "Time/Steps")

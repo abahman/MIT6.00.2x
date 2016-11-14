@@ -58,11 +58,11 @@
       </MacroExpansion>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "$(SOURCE_ROOT)/pset1/ps1.py"
+            argument = "$(SOURCE_ROOT)/pset2/ps2.py"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "$(SOURCE_ROOT)/pset1/ps1_partition.py"
+            argument = "$(SOURCE_ROOT)/pset2/ps2_visualize.py"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
