@@ -59,6 +59,10 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "$(SOURCE_ROOT)/pset2/ps2.py"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "$(SOURCE_ROOT)/flipcoin.py"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
