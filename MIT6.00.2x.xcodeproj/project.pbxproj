@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		A23292901DDFF2AE001DD9D2 /* ps3b.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = ps3b.py; sourceTree = "<group>"; };
+		A23292911DDFF2AE001DD9D2 /* ps3b_precompiled_35.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = ps3b_precompiled_35.pyc; sourceTree = "<group>"; };
 		A24BA8591DDE9B6C0016CF87 /* coin_flips.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = coin_flips.txt; sourceTree = "<group>"; };
 		A24BA85A1DDE9B6C0016CF87 /* flipcoin.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = flipcoin.py; sourceTree = "<group>"; };
 		A25A273C1DD2BC5800A6D4B7 /* ps2.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = ps2.py; sourceTree = "<group>"; };
@@ -20,6 +22,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		A232928F1DDFF2AE001DD9D2 /* pset3 */ = {
+			isa = PBXGroup;
+			children = (
+				A23292901DDFF2AE001DD9D2 /* ps3b.py */,
+				A23292911DDFF2AE001DD9D2 /* ps3b_precompiled_35.pyc */,
+			);
+			path = pset3;
+			sourceTree = "<group>";
+		};
 		A25A273B1DD2BC5800A6D4B7 /* pset2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -39,6 +50,7 @@
 				A2854BC41DC67C5D00DF1854 /* powerset.py */,
 				A2854BC51DC67C5D00DF1854 /* pset1 */,
 				A25A273B1DD2BC5800A6D4B7 /* pset2 */,
+				A232928F1DDFF2AE001DD9D2 /* pset3 */,
 			);
 			sourceTree = "<group>";
 		};
