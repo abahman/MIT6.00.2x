@@ -59,11 +59,11 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "$(SOURCE_ROOT)/pset3/ps3b.py"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "$(SOURCE_ROOT)/flipcoin.py"
-            isEnabled = "NO">
+            argument = "$(SOURCE_ROOT)/test.py"
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "$(SOURCE_ROOT)/pset2/ps2_visualize.py"
