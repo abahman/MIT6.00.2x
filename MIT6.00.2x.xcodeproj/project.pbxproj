@@ -9,6 +9,8 @@
 /* Begin PBXFileReference section */
 		A23292901DDFF2AE001DD9D2 /* ps3b.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = ps3b.py; sourceTree = "<group>"; };
 		A23292911DDFF2AE001DD9D2 /* ps3b_precompiled_35.pyc */ = {isa = PBXFileReference; lastKnownFileType = file; path = ps3b_precompiled_35.pyc; sourceTree = "<group>"; };
+		A23DDDB61DF52763004EF009 /* lectureCode_L17_code.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = lectureCode_L17_code.py; sourceTree = "<group>"; };
+		A23DDDB71DF52763004EF009 /* springData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = springData.txt; sourceTree = "<group>"; };
 		A24BA8591DDE9B6C0016CF87 /* coin_flips.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = coin_flips.txt; sourceTree = "<group>"; };
 		A24BA85A1DDE9B6C0016CF87 /* flipcoin.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = flipcoin.py; sourceTree = "<group>"; };
 		A25A273C1DD2BC5800A6D4B7 /* ps2.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = ps2.py; sourceTree = "<group>"; };
@@ -44,6 +46,8 @@
 		A2854BB91DC67BE900DF1854 = {
 			isa = PBXGroup;
 			children = (
+				A23DDDB61DF52763004EF009 /* lectureCode_L17_code.py */,
+				A23DDDB71DF52763004EF009 /* springData.txt */,
 				A24BA8591DDE9B6C0016CF87 /* coin_flips.txt */,
 				A24BA85A1DDE9B6C0016CF87 /* flipcoin.py */,
 				A2BBB69F1DDD607C00F9BB26 /* test.py */,
